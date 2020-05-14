@@ -6,46 +6,70 @@
     <link href="style.css" rel="stylesheet">
 </head>
 <body>
-<div class="board" id="contentDiv"> 
-
+<div class="scoreInputDiv">
+    <input type="text" id="scoreInput" onchange="addScore()">
 </div>
+<div class="board" id="contentDiv"> </div>
 <script>
+
 //model
+const scoreInput = document.getElementById("scoreInput")
 let scoreboard = [];
 const labels = ['Enere','Toere','Treere','Firere','Femmere','Seksere','Sum','Bonus',
     'Ett par','To par','Tre like', 'Fire like','Liten straight','Stor straight','Hus','Sjanse', 'Yatze','total'];
+let x = 0
+let z = 0
 
-//controller
+//view
+let html;
 createScore()
 function createScore(){
     for(i = 0; i < labels.length; i++){
-        scoreboard.push({score: 0})
-    }
-}
-//view
-createBoard()
-function createBoard(){
+        scoreboard.push({pointsP1: '', pointsP2: ''});
 
-    let html = `
+    }
+    show()
+}
+function show(){
+    html = `
     <table>
         <tr>
-            <td>Names:</td>
-            <td>Kevin</td>
-            <td>Geir</td>
+            <th class="labelRow">Navn:</th>
+            <th>Kevin</th>
+            <th>Geir</th>
         </tr>
     `;
+    createBoard()
+    html += '</table>';
+    document.getElementById("contentDiv").innerHTML = html;
+}
+
+function createBoard(){
     for(i = 0; i < labels.length; i++){
         const label = labels[i];
         const scores = scoreboard[i];
         html += `
         <tr>
             <td>${label}</td>
-            <td>${scores.score}</td>
-            <td>${''}</td>
+            <td>${scores.pointsP1}</td>
+            <td>${scores.pointsP2}</td>
         </tr>`
     };
-    html += '</table>';
-    document.getElementById("contentDiv").innerHTML = html;
+}
+//controller
+function addScore(){
+    if (x == 0){
+        scoreboard[z].pointsP1 = scoreInput.value;
+        x = 1;
+        }
+    else {
+        scoreboard[z].pointsP2 = scoreInput.value
+        z++
+        x = 0;
+        }
+    console.log(x)
+    show()
+    scoreInput.value ='';
 }
 
 </script>
