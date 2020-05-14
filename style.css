@@ -1,0 +1,15 @@
+.board{
+    color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    zoom: 1.5;
+}
+table {
+    border: 2px solid black;
+}
+td {
+    border: 1px solid black;
+    
+    
+}

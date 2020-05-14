@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Yatzy</title>
+    <link href="style.css" rel="stylesheet">
+</head>
+<body>
+<div class="board" id="contentDiv"> 
+
+</div>
+<script>
+//model
+let scoreboard = [];
+const labels = ['Enere','Toere','Treere','Firere','Femmere','Seksere','Sum','Bonus',
+    'Ett par','To par','Tre like', 'Fire like','Liten straight','Stor straight','Hus','Sjanse', 'Yatze','total'];
+
+//controller
+createScore()
+function createScore(){
+    for(i = 0; i < labels.length; i++){
+        scoreboard.push({score: 0})
+    }
+}
+//view
+createBoard()
+function createBoard(){
+
+    let html = `
+    <table>
+        <tr>
+            <td>Names:</td>
+            <td>Kevin</td>
+            <td>Geir</td>
+        </tr>
+    `;
+    for(i = 0; i < labels.length; i++){
+        const label = labels[i];
+        const scores = scoreboard[i];
+        html += `
+        <tr>
+            <td>${label}</td>
+            <td>${scores.score}</td>
+            <td>${''}</td>
+        </tr>`
+    };
+    html += '</table>';
+    document.getElementById("contentDiv").innerHTML = html;
+}
+
+</script>
+</body>
+</html>
