@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Yatzy</title>
+    <link href="style.css" rel="stylesheet">
+</head>
+<body>
+<div class="board" id="contentDiv"> </div>
+<script>
+
+//model
+let sum1 = 0;
+let sum2 = 0;
+let scoreboard = [];
+const labels = ['Enere','Toere','Treere','Firere','Femmere','Seksere','Sum','Bonus',
+    'Ett par','To par','Tre like', 'Fire like','Liten straight','Stor straight','Hus','Sjanse', 'Yatze','total'];
+
+
+//view
+let html;
+createScore()
+function createScore(){
+    for(i = 0; i < labels.length; i++){
+        scoreboard.push({pointsP1: '', pointsP2: ''});
+
+    }
+    show()
+}
+function show(){
+    html = `
+    <table>
+        <tr>
+            <th class="labelRow">Navn:</th>
+            <th>Kevin</th>
+            <th>Geir</th>
+        </tr>
+    `;
+    createBoard()
+    html += '</table>';
+    document.getElementById("contentDiv").innerHTML = html;
+}
+
+function createBoard(){
+    for(i = 0; i < labels.length; i++){
+        const label = labels[i];
+        const scores = scoreboard[i];
+        html += `
+        <tr>
+            <td>${label}</td>
+        `
+        if(scores.pointsP1 =='') {
+            html += ` <td><input type="text" onchange="addScoreP1(${i}, this.value)"></td>`
+    }
+            else {
+                html +=` <td>${scores.pointsP1}</td>`
+    }
+        if(scores.pointsP2 == ''){
+            html += `<td><input type="text" onchange="addScoreP2(${i}, this.value)"></td>`
+    }
+            else {
+                html += `<td>${scores.pointsP2}</td>`
+    }
+    html +='</tr>';
+};
+}
+//controller
+function addScoreP1(i, x){
+    const scores = scoreboard[i];
+    scores.pointsP1 = x;
+    calculateSum();
+    calculateTotal();
+    show();
+}
+function addScoreP2(i, x){
+    const scores = scoreboard[i];
+    scores.pointsP2 = x;
+    calculateSum();
+    calculateTotal();
+    show();
+}
+function calculateSum(){
+    let sum1 = 0;
+    let sum2 = 0;
+    for(i = 0; i < 6; i++){
+        const scores = scoreboard[i];
+        if(scores.pointsP1 == '') scores.pointsP1 = 0;
+        sum1 += parseInt(scores.pointsP1)
+    }
+    scoreboard[6].pointsP1 = sum1;
+    if(sum1 >= 63){scoreboard[7].pointsP1 = 50}
+    else {scoreboard[7].pointsP1 = 0}
+    
+    for(i = 0; i <= 5; i++){
+        const scores = scoreboard[i];
+        if(scores.pointsP2 == '') scores.pointsP2 = 0;
+        sum2 += parseInt(scores.pointsP2)
+    }
+    scoreboard[6].pointsP2 = sum2;
+    if(sum2 >= 63){scoreboard[7].pointsP2 = 50}
+    else {scoreboard[7].pointsP2 = 0}
+    
+}
+function calculateTotal(){
+    let temp1 = 0;
+    let temp2 = 0;
+    let total1 = temp1 - sum1;
+    let total2 = temp2 - sum2;
+    for(i=0; i <= 17; i++){
+        const scores = scoreboard[i];
+        if(scores.pointsP1 == '') scores.pointsP1 = 0;
+        temp1 += parseInt(scores.pointsP1)
+    }
+    scoreboard[17].pointsP1 = total2;
+    console.log(temp1, 'temp')
+    console.log(sum1, 'sum')
+    console.log(total1, 'total')
+    for(i=0; i<labels.length; i++){
+        const scores = scoreboard[i];
+        if(scores.pointsP2 == '') scores.pointsP2 = 0;
+        temp2 += parseInt(scores.pointsP2)
+    }
+    scoreboard[17].pointsP2 = total2;
+}
+</script>
+</body>
+</html>

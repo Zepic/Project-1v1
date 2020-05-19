@@ -23,3 +23,6 @@ th {
 .scoreInputDiv{
     color: blue;
 }
+input{
+    width: 50px;
+}
