@@ -15,7 +15,7 @@ let sum2 = 0;
 let scoreboard = [];
 const labels = ['Enere','Toere','Treere','Firere','Femmere','Seksere','Sum','Bonus',
     'Ett par','To par','Tre like', 'Fire like','Liten straight','Stor straight','Hus','Sjanse', 'Yatze','total'];
-
+let names = [];
 
 //view
 let html;
@@ -65,6 +65,7 @@ function createBoard(){
 };
 }
 //controller
+
 function addScoreP1(i, x){
     const scores = scoreboard[i];
     scores.pointsP1 = x;

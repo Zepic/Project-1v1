@@ -1,3 +1,6 @@
+body{
+    background: linear-gradient(to right, hsl(182, 97%, 28%), hsl(209, 91%, 23%)) ;
+}
 .board{
     color: black;
     display: flex;
@@ -5,6 +8,7 @@
     justify-content: center;
     zoom: 1.5;
 }
+
 table {
     border: 2px solid black;
     border-collapse: collapse;
