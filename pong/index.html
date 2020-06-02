@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="contentDiv">
+
+    </div>
+
+    <script>
+        //model
+        const content = document.getElementById("contentDiv");
+
+        //view
+        show()
+        function show(){
+            content.innerHTML = `
+            <div class="window">
+            <div class="game">
+                <div class="playerLeft">q</div>
+                <div class="playerRight">w</div>
+                <div class="ball">e</div>
+            </div>`
+        }
+
+        //controller
+        function moveBall(){
+            
+        }
+    </script>
+</body>
+</html>
