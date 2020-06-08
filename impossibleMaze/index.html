@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="style.css" rel="stylesheet">
+</head>
+<body>
+    <div id="content" class="content"></div>
+    <input type='range' min='1' max='10' value='2' step='1' onchange='setMazeSize(this.value)' class='sizeInput' placeholder='Change Maze Size'>    
+    <script>
+        const mazeModel = {
+            size: 2,
+            rows: [
+                [ 
+                    { isHigh: false, isWide: false, isOpen: false }, //corner
+                    { isHigh: false, isWide: true, isOpen: false },  //wall
+                    { isHigh: false, isWide: false, isOpen: false }, //corner
+                    { isHigh: false, isWide: true, isOpen: false },  //wall
+                    { isHigh: false, isWide: false, isOpen: false }, //corner
+                ],
+                [ 
+                    { isHigh: true, isWide: false, isOpen: false }, //corner
+                    { isHigh: true, isWide: true },                 //room
+                    { isHigh: true, isWide: false, isOpen: false }, //corner
+                    { isHigh: true, isWide: true },                 //room
+                    { isHigh: true, isWide: false, isOpen: false }, //corner
+                ],
+                [ 
+                    { isHigh: false, isWide: false, isOpen: false }, //corner
+                    { isHigh: false, isWide: true, isOpen: false },  //wall
+                    { isHigh: false, isWide: false, isOpen: false }, //corner
+                    { isHigh: false, isWide: true, isOpen: false },  //wall
+                    { isHigh: false, isWide: false, isOpen: false }, //corner
+                ],
+                [ 
+                    { isHigh: true, isWide: false, isOpen: false }, //corner
+                    { isHigh: true, isWide: true},                  //room
+                    { isHigh: true, isWide: false, isOpen: false }, //corner
+                    { isHigh: true, isWide: true },                 //room
+                    { isHigh: true, isWide: false, isOpen: false }, //corner
+                ],
+                [ 
+                    { isHigh: false, isWide: false, isOpen: false }, //corner
+                    { isHigh: false, isWide: true, isOpen: false },  //wall
+                    { isHigh: false, isWide: false, isOpen: false }, //corner
+                    { isHigh: false, isWide: true, isOpen: false },  //wall
+                    { isHigh: false, isWide: false, isOpen: false }, //corner
+                ],
+            ]
+        };
+//view
+    function assignCss(box){
+        const highLow = box.isHigh ? 'high ' : 'low ';
+        const wideSmall = box.isWide ? 'wide ' : 'small ';
+        const walls = box.isOpen ? 'noWall ' : 'wall ';
+        if (box.isHigh && box.isWide) return 'room';  
+        return highLow + wideSmall + walls;
+    }
+    updateView()
+    function updateView(){ // utganspunk i kodeforslaget til terje fordi jeg fikk det ikke til å funke
+        document.getElementById('content').innerHTML = `
+        <table>
+                    ${mazeModel.rows.map((row) => `
+                    <tr>
+                        ${row.map((col) => `
+                        <td class="${assignCss(col)}">
+                        </td>
+                        `).join('')}
+                    </tr>    
+                    `).join('')}
+                </table>
+            `;
+    }
+
+    function setMazeSize(value){
+        mazeModel.size = value;
+        updateView()
+    }
+
+    </script>
+</body>
+</html>
